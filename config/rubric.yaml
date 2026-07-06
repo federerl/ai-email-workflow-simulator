@@ -1,0 +1,49 @@
+# Configurable "is this worth replying to?" rubric.
+#
+# `categories` controls which classification categories go through the
+# rubric-based decisioning LLM call at all. Categories with
+# applies_rubric: false are auto-decided from `auto_decision` with a
+# templated rationale -- no LLM call, no rubric criteria involved.
+categories:
+  RFP:
+    applies_rubric: true
+  Follow-up:
+    applies_rubric: true
+  Marketing:
+    applies_rubric: false
+    auto_decision: Decline
+  Internal:
+    applies_rubric: false
+    auto_decision: Decline
+  Other:
+    applies_rubric: false
+    auto_decision: Needs-Human-Review
+
+# Criteria folded into the decisioning prompt for any category with
+# applies_rubric: true. Weights are informational context for the model,
+# not recomputed/cross-checked in this prototype (see README).
+criteria:
+  - key: mission_fit
+    label: "Mission fit"
+    description: "Does the opportunity align with the company's core capabilities and mission?"
+    weight: 0.25
+  - key: response_window
+    label: "Response window"
+    description: "Is there enough time before the deadline to prepare a competitive response?"
+    weight: 0.15
+  - key: contract_vehicle
+    label: "Contract vehicle"
+    description: "Is the opportunity available through a contract vehicle the company holds or can access?"
+    weight: 0.20
+  - key: dollar_value
+    label: "Dollar value"
+    description: "Is the estimated contract value worth the effort of pursuing?"
+    weight: 0.20
+  - key: incumbency
+    label: "Incumbency"
+    description: "Does the company (or a close partner) have an incumbency advantage on this opportunity?"
+    weight: 0.20
+
+thresholds:
+  pursue_min_score: 0.6
+  decline_max_score: 0.3
