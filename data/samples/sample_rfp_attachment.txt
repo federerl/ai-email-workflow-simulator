@@ -1,0 +1,18 @@
+STATEMENT OF WORK (excerpt)
+Solicitation: RFP-2026-0417
+Issuing Office: Naval Systems Group
+Contract Vehicle: OASIS+
+Estimated Value: $2,400,000 (18-month period of performance)
+Proposal Due Date: 2026-07-27
+
+Scope:
+Contractor shall design, integrate, and field-test a secure tactical
+communications relay compatible with existing field kit hardware
+deployed under the FY25 pilot program. Deliverables include a system
+design document, integration test report, and field deployment plan.
+
+Evaluation Criteria:
+1. Technical approach and integration risk
+2. Past performance / incumbency on FY25 pilot
+3. Cost realism
+4. Schedule feasibility within the 18-month period of performance
