@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-email-workflow-simulator"
+version = "0.1.0"
+description = "Local prototype simulating an end-to-end AI email workflow: mock email ingestion, classification, pursue/decline decisioning, response drafting, and human review."
+requires-python = ">=3.11"
+dependencies = [
+    "boto3",
+    "Flask",
+    "PyYAML",
+    "python-dotenv",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+docs = ["pypdf", "python-docx"]
+
+[project.scripts]
+aiews-ingest = "ai_email_workflow_simulator.cli:main"
+aiews-review = "ai_email_workflow_simulator.webapp.app:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
