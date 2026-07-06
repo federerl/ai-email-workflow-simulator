@@ -1,0 +1,17 @@
+body { font-family: system-ui, sans-serif; margin: 0; color: #1a1a1a; background: #fafafa; }
+header { background: #1a1a1a; padding: 0.75rem 1.5rem; }
+header a { text-decoration: none; }
+header h1 { color: #fff; font-size: 1.1rem; margin: 0; }
+main { max-width: 900px; margin: 1.5rem auto; padding: 0 1.5rem; }
+table { width: 100%; border-collapse: collapse; background: #fff; }
+th, td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid #e0e0e0; font-size: 0.9rem; }
+tr.status-needs_review td { background: #fff8e1; }
+tr.status-pending_review td { background: #e8f0fe; }
+dl { display: grid; grid-template-columns: max-content 1fr; gap: 0.25rem 1rem; }
+dt { font-weight: 600; }
+.message-body { background: #fff; border: 1px solid #e0e0e0; padding: 1rem; white-space: pre-wrap; word-wrap: break-word; }
+textarea { width: 100%; font-family: inherit; font-size: 0.9rem; }
+form.inline { display: inline-block; margin-right: 0.5rem; }
+.actions { margin: 0.5rem 0; }
+button { padding: 0.4rem 0.9rem; cursor: pointer; }
+button.danger { background: #fde7e7; border-color: #c62828; }
