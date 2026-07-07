@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Queue - AI Email Workflow Simulator{% endblock %}
+{% block content %}
+<h2>Queue</h2>
+{% if not items %}
+  <p>No items yet. Run <code>aiews-ingest &lt;path&gt;</code> to add one.</p>
+{% else %}
+<table>
+  <thead>
+    <tr>
+      <th>ID</th><th>Subject</th><th>Sender</th><th>Category</th>
+      <th>Decision</th><th>Status</th><th>Ingested</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in items %}
+    <tr class="status-{{ item['review_status'] }}">
+      <td><a href="{{ url_for('item_detail', item_id=item['id']) }}">#{{ item['id'] }}</a></td>
+      <td>{{ item['subject'] }}</td>
+      <td>{{ item['sender'] }}</td>
+      <td>{{ item['category'] }}</td>
+      <td>{{ item['decision'] }}</td>
+      <td>{{ item['review_status'] }}</td>
+      <td>{{ item['created_at'] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Item #{{ item['id'] }} - AI Email Workflow Simulator{% endblock %}
+{% block content %}
+<p><a href="{{ url_for('queue') }}">&larr; back to queue</a></p>
+<h2>#{{ item['id'] }}: {{ item['subject'] }}</h2>
+<dl>
+  <dt>From</dt><dd>{{ item['sender'] }}</dd>
+  <dt>Sent</dt><dd>{{ item['sent_at'] }}</dd>
+  <dt>Category</dt><dd>{{ item['category'] }}</dd>
+  <dt>Decision</dt><dd>{{ item['decision'] }}</dd>
+  <dt>Status</dt><dd>{{ item['review_status'] }}</dd>
+  <dt>Rationale</dt><dd>{{ item['rationale'] }}</dd>
+  <dt>Model / prompt version</dt><dd>{{ item['model_id'] or '(auto-decision, no model call)' }} / {{ item['prompt_version'] or 'n/a' }}</dd>
+</dl>
+
+<h3>Original message</h3>
+<pre class="message-body">{{ item['body_text'] }}</pre>
+
+{% if item['decision'] == 'Pursue' and item['review_status'] == 'pending_review' %}
+  <h3>Drafted response (pending review)</h3>
+  <form method="post" action="{{ url_for('edit_approve', item_id=item['id']) }}">
+    <textarea name="final_draft_text" rows="14" cols="80">{{ item['draft_text'] }}</textarea>
+    <div class="actions">
+      <button type="submit">Save edits &amp; approve</button>
+    </div>
+  </form>
+  <form method="post" action="{{ url_for('approve', item_id=item['id']) }}" class="inline">
+    <button type="submit">Approve as-is</button>
+  </form>
+  <form method="post" action="{{ url_for('reject', item_id=item['id']) }}" class="inline">
+    <button type="submit" class="danger">Reject</button>
+  </form>
+
+{% elif item['decision'] == 'Pursue' %}
+  <h3>Final draft ({{ item['review_status'] }}{% if item['edited'] %}, edited{% endif %})</h3>
+  <pre class="message-body">{{ item['final_draft_text'] }}</pre>
+
+{% elif item['decision'] == 'Needs-Human-Review' and item['review_status'] == 'needs_review' %}
+  <h3>Needs human review</h3>
+  <form method="post" action="{{ url_for('resolve', item_id=item['id']) }}">
+    <label><input type="radio" name="resolution" value="pursue" required> Pursue (draft a response)</label><br>
+    <label><input type="radio" name="resolution" value="decline"> Decline</label><br>
+    <div class="actions">
+      <button type="submit">Resolve</button>
+    </div>
+  </form>
+
+{% elif item['decision'] == 'Decline' %}
+  <p><em>Declined -- no reply needed.</em></p>
+{% endif %}
+{% endblock %}
