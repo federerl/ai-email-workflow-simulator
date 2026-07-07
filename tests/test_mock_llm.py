@@ -26,8 +26,8 @@ def test_converse_never_touches_boto3_in_mock_mode(monkeypatch):
     assert json.loads(result)["category"] == "RFP"
 
 
-def test_run_pipeline_rfp_email_end_to_end_with_no_aws():
-    item_id = run_pipeline("data/samples/sample_rfp_email.eml")
+def test_run_pipeline_rfp_email_end_to_end_with_no_aws(samples_dir):
+    item_id = run_pipeline(samples_dir / "sample_rfp_email.eml")
     row = db.get_item(item_id)
     assert row["category"] == "RFP"
     assert row["decision"] == "Pursue"
@@ -36,16 +36,16 @@ def test_run_pipeline_rfp_email_end_to_end_with_no_aws():
     assert row["model_id"] == "mock"
 
 
-def test_run_pipeline_marketing_email_auto_declines_with_no_model_call():
-    item_id = run_pipeline("data/samples/sample_marketing_email.eml")
+def test_run_pipeline_marketing_email_auto_declines_with_no_model_call(samples_dir):
+    item_id = run_pipeline(samples_dir / "sample_marketing_email.eml")
     row = db.get_item(item_id)
     assert row["category"] == "Marketing"
     assert row["decision"] == "Decline"
     assert row["review_status"] == "closed"
 
 
-def test_run_pipeline_followup_email_needs_human_review():
-    item_id = run_pipeline("data/samples/sample_followup_email.eml")
+def test_run_pipeline_followup_email_needs_human_review(samples_dir):
+    item_id = run_pipeline(samples_dir / "sample_followup_email.eml")
     row = db.get_item(item_id)
     assert row["category"] == "Follow-up"
     assert row["decision"] == "Needs-Human-Review"
