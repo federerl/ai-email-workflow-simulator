@@ -34,7 +34,7 @@ def converse(
     system_prompt: str,
     user_prompt: str,
     *,
-    temperature: float = 0.0,
+    temperature: float | None = None,
     max_tokens: int = 1024,
 ) -> str:
     if config.MOCK_LLM:
@@ -46,13 +46,20 @@ def converse(
             "model id enabled for your AWS account/region."
         )
 
+    # Newer Claude models (Opus 4.8/4.7, Sonnet 5) reject non-default sampling
+    # parameters, so only include `temperature` when a caller explicitly sets
+    # it. Older models still accept it if you switch BEDROCK_MODEL_ID back.
+    inference_config = {"maxTokens": max_tokens}
+    if temperature is not None:
+        inference_config["temperature"] = temperature
+
     try:
         client = get_client()
         response = client.converse(
             modelId=config.BEDROCK_MODEL_ID,
             system=[{"text": system_prompt}],
             messages=[{"role": "user", "content": [{"text": user_prompt}]}],
-            inferenceConfig={"temperature": temperature, "maxTokens": max_tokens},
+            inferenceConfig=inference_config,
         )
     except (NoCredentialsError, ProfileNotFound, NoRegionError) as exc:
         raise BedrockConfigError(

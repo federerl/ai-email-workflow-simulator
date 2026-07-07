@@ -19,7 +19,9 @@ through a small local web UI instead of a real inbox.
 3. Configure AWS credentials the normal way (`aws configure`, env vars, or
    an `AWS_PROFILE`) -- never commit credentials.
 4. Copy `.env.example` to `.env` and set `AWS_REGION` / `BEDROCK_MODEL_ID`
-   to a model enabled for your account.
+   to a model enabled for your account. The example points at Claude Opus 4.8
+   (`us.anthropic.claude-opus-4-8-v1:0`) -- confirm the exact inference-profile
+   id for your region with `aws bedrock list-inference-profiles`.
 
 ### Try it without AWS access
 
