@@ -1,0 +1,85 @@
+# Labeled evaluation set for measuring pipeline quality.
+#
+# For each file:
+#   category  - the single correct classification (objective ground truth).
+#   decision  - the acceptable set of decisions. Usually one value; genuinely
+#               borderline items list several, and the model's decision counts
+#               as correct if it lands in the set (reasonable reviewers could
+#               disagree on these).
+#   note      - why this item is in the set / what it exercises.
+#
+# Auto-decided categories (Marketing, Internal, Other) never reach the model's
+# decision call -- their decision comes from config/rubric.yaml -- so they test
+# the config, not model judgment. RFP and Follow-up are the rubric-judged items
+# where the model's decision quality actually shows.
+
+items:
+  # --- RFP (rubric-judged) ---
+  - file: rfp_strong.eml
+    category: RFP
+    decision: [Pursue]
+    note: "Clear pursue: strong mission fit, held vehicle, $4.1M, 30-day window, incumbency."
+  - file: rfp_short_deadline.eml
+    category: RFP
+    decision: [Decline, Needs-Human-Review]
+    note: "Borderline: great fit but a 3-day response window; response-window criterion should dominate."
+  - file: rfp_offmission_lowvalue.eml
+    category: RFP
+    decision: [Decline]
+    note: "Clear decline: janitorial services, off-mission, $85K, no clearances."
+  - file: rfp_cyber_solid.eml
+    category: RFP
+    decision: [Pursue]
+    note: "Pursue: strong cyber fit, held IDIQ, $1.8M, 25 days; no incumbency but requirements match."
+
+  # --- Follow-up (rubric-judged) ---
+  - file: followup_ready.eml
+    category: Follow-up
+    decision: [Pursue]
+    note: "Pursue: concrete follow-on to a won pilot, clear scope/value, ready to proceed."
+  - file: followup_vague.eml
+    category: Follow-up
+    decision: [Needs-Human-Review]
+    note: "Escalate: no scope, value, or context to score the rubric."
+  - file: followup_borderline.eml
+    category: Follow-up
+    decision: [Pursue, Needs-Human-Review]
+    note: "Borderline: exploratory teaming, no solicitation yet, scope/value TBD."
+
+  # --- Marketing (auto-decline per rubric.yaml) ---
+  - file: marketing_saas.eml
+    category: Marketing
+    decision: [Decline]
+    note: "Vendor SaaS pitch with unsubscribe footer."
+  - file: marketing_conference.eml
+    category: Marketing
+    decision: [Decline]
+    note: "Paid sponsorship/exhibit solicitation."
+  - file: marketing_cold.eml
+    category: Marketing
+    decision: [Decline]
+    note: "Cold staffing-vendor pitch."
+
+  # --- Internal (auto-decline per rubric.yaml) ---
+  - file: internal_hr.eml
+    category: Internal
+    decision: [Decline]
+    note: "Internal HR benefits notice."
+  - file: internal_allhands.eml
+    category: Internal
+    decision: [Decline]
+    note: "Internal all-hands announcement."
+  - file: internal_rfp_prep.eml
+    category: Internal
+    decision: [Decline]
+    note: "Edge case: internal capture-team email about an RFP -- mentions 'RFP' heavily but is internal correspondence, not an inbound solicitation."
+
+  # --- Other (auto needs-human-review per rubric.yaml) ---
+  - file: other_misdirected.eml
+    category: Other
+    decision: [Needs-Human-Review]
+    note: "Misdirected dental reminder -- fits no business category."
+  - file: other_ambiguous_inquiry.eml
+    category: Other
+    decision: [Needs-Human-Review]
+    note: "Vague general inquiry with no actionable content."

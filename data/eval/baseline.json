@@ -1,0 +1,202 @@
+{
+  "timestamp": "2026-07-13T17:40:45.548826+00:00",
+  "model_id": "us.anthropic.claude-opus-4-8",
+  "mock": false,
+  "summary": {
+    "n_items": 15,
+    "classification_correct": 14,
+    "classification_accuracy": 0.9333,
+    "decision_correct": 15,
+    "decision_accuracy": 1.0,
+    "decision_rubric_total": 7,
+    "decision_rubric_correct": 7,
+    "decision_rubric_accuracy": 1.0,
+    "decision_auto_total": 8,
+    "decision_auto_correct": 8,
+    "decision_auto_accuracy": 1.0
+  },
+  "items": [
+    {
+      "file": "rfp_strong.eml",
+      "expected_category": "RFP",
+      "predicted_category": "RFP",
+      "category_correct": true,
+      "expected_decisions": [
+        "Pursue"
+      ],
+      "predicted_decision": "Pursue",
+      "decision_correct": true,
+      "rubric_judged": true
+    },
+    {
+      "file": "rfp_short_deadline.eml",
+      "expected_category": "RFP",
+      "predicted_category": "RFP",
+      "category_correct": true,
+      "expected_decisions": [
+        "Decline",
+        "Needs-Human-Review"
+      ],
+      "predicted_decision": "Needs-Human-Review",
+      "decision_correct": true,
+      "rubric_judged": true
+    },
+    {
+      "file": "rfp_offmission_lowvalue.eml",
+      "expected_category": "RFP",
+      "predicted_category": "RFP",
+      "category_correct": true,
+      "expected_decisions": [
+        "Decline"
+      ],
+      "predicted_decision": "Decline",
+      "decision_correct": true,
+      "rubric_judged": true
+    },
+    {
+      "file": "rfp_cyber_solid.eml",
+      "expected_category": "RFP",
+      "predicted_category": "RFP",
+      "category_correct": true,
+      "expected_decisions": [
+        "Pursue"
+      ],
+      "predicted_decision": "Pursue",
+      "decision_correct": true,
+      "rubric_judged": true
+    },
+    {
+      "file": "followup_ready.eml",
+      "expected_category": "Follow-up",
+      "predicted_category": "Follow-up",
+      "category_correct": true,
+      "expected_decisions": [
+        "Pursue"
+      ],
+      "predicted_decision": "Pursue",
+      "decision_correct": true,
+      "rubric_judged": true
+    },
+    {
+      "file": "followup_vague.eml",
+      "expected_category": "Follow-up",
+      "predicted_category": "Follow-up",
+      "category_correct": true,
+      "expected_decisions": [
+        "Needs-Human-Review"
+      ],
+      "predicted_decision": "Needs-Human-Review",
+      "decision_correct": true,
+      "rubric_judged": true
+    },
+    {
+      "file": "followup_borderline.eml",
+      "expected_category": "Follow-up",
+      "predicted_category": "RFP",
+      "category_correct": false,
+      "expected_decisions": [
+        "Pursue",
+        "Needs-Human-Review"
+      ],
+      "predicted_decision": "Needs-Human-Review",
+      "decision_correct": true,
+      "rubric_judged": true
+    },
+    {
+      "file": "marketing_saas.eml",
+      "expected_category": "Marketing",
+      "predicted_category": "Marketing",
+      "category_correct": true,
+      "expected_decisions": [
+        "Decline"
+      ],
+      "predicted_decision": "Decline",
+      "decision_correct": true,
+      "rubric_judged": false
+    },
+    {
+      "file": "marketing_conference.eml",
+      "expected_category": "Marketing",
+      "predicted_category": "Marketing",
+      "category_correct": true,
+      "expected_decisions": [
+        "Decline"
+      ],
+      "predicted_decision": "Decline",
+      "decision_correct": true,
+      "rubric_judged": false
+    },
+    {
+      "file": "marketing_cold.eml",
+      "expected_category": "Marketing",
+      "predicted_category": "Marketing",
+      "category_correct": true,
+      "expected_decisions": [
+        "Decline"
+      ],
+      "predicted_decision": "Decline",
+      "decision_correct": true,
+      "rubric_judged": false
+    },
+    {
+      "file": "internal_hr.eml",
+      "expected_category": "Internal",
+      "predicted_category": "Internal",
+      "category_correct": true,
+      "expected_decisions": [
+        "Decline"
+      ],
+      "predicted_decision": "Decline",
+      "decision_correct": true,
+      "rubric_judged": false
+    },
+    {
+      "file": "internal_allhands.eml",
+      "expected_category": "Internal",
+      "predicted_category": "Internal",
+      "category_correct": true,
+      "expected_decisions": [
+        "Decline"
+      ],
+      "predicted_decision": "Decline",
+      "decision_correct": true,
+      "rubric_judged": false
+    },
+    {
+      "file": "internal_rfp_prep.eml",
+      "expected_category": "Internal",
+      "predicted_category": "Internal",
+      "category_correct": true,
+      "expected_decisions": [
+        "Decline"
+      ],
+      "predicted_decision": "Decline",
+      "decision_correct": true,
+      "rubric_judged": false
+    },
+    {
+      "file": "other_misdirected.eml",
+      "expected_category": "Other",
+      "predicted_category": "Other",
+      "category_correct": true,
+      "expected_decisions": [
+        "Needs-Human-Review"
+      ],
+      "predicted_decision": "Needs-Human-Review",
+      "decision_correct": true,
+      "rubric_judged": false
+    },
+    {
+      "file": "other_ambiguous_inquiry.eml",
+      "expected_category": "Other",
+      "predicted_category": "Other",
+      "category_correct": true,
+      "expected_decisions": [
+        "Needs-Human-Review"
+      ],
+      "predicted_decision": "Needs-Human-Review",
+      "decision_correct": true,
+      "rubric_judged": false
+    }
+  ]
+}

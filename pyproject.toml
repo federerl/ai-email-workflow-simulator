@@ -21,6 +21,7 @@ docs = ["pypdf", "python-docx"]
 [project.scripts]
 aiews-ingest = "ai_email_workflow_simulator.cli:main"
 aiews-review = "ai_email_workflow_simulator.webapp.app:main"
+aiews-eval = "ai_email_workflow_simulator.eval:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
