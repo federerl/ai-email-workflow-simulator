@@ -29,15 +29,18 @@ Turns "it runs" into "it works." Nothing below is meaningful until this is green
 
 > Note: the IAM user's policy grants `bedrock:InvokeModel` / `InvokeModelWithResponseStream` / `ListFoundationModels` / `ListInferenceProfiles` only — Bedrock-only blast radius. Cost guardrail: a $10 monthly AWS Budget alert.
 
-## 2. Measure quality, don't eyeball it
+## 2. Measure quality, don't eyeball it  ✅ DONE (2026-07-13)
 
 No ground truth exists today, so we can't tell if a change helps or hurts.
 
-- [ ] Build a small labeled eval set: sample `.eml`s + expected `category` and `decision`.
-- [ ] Add a script that runs the pipeline over the set and reports accuracy (and disagreements).
-- [ ] Record a baseline for Opus 4.8.
+- [x] Built a 15-email labeled eval set (`data/eval/*.eml` + `labels.yaml`) across all 5 categories, with edge cases and acceptable-decision-sets on borderline items.
+- [x] Added `aiews-eval` (`src/.../eval.py`): scores classification + decision (stage-isolated) over the set, prints per-item + aggregate accuracy and a disagreement list. Covered by `tests/test_eval.py` (mock mode).
+- [x] Recorded the Opus 4.8 baseline in `data/eval/baseline.json` (`--save-baseline`).
 
-**Done when:** `python -m ... eval` (or similar) prints per-item and aggregate accuracy against expectations.
+**Done when:** `aiews-eval` prints per-item and aggregate accuracy against expectations. ✅
+
+> **Baseline (Opus 4.8, 2026-07-13):** classification 14/15 (93.3%); decision 15/15 — rubric-judged RFP/Follow-up 7/7, auto-decided 8/8.
+> Only miss: `followup_borderline.eml` classified RFP instead of Follow-up (a `RE:` about a *future* solicitation — genuinely on the RFP/Follow-up line; revisit the classify prompt or the label). Re-run `aiews-eval` after any prompt/model change to compare against this.
 
 ## 3. Harden model I/O for a reasoning model
 
